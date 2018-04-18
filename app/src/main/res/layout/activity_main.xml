@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/accountButton"
@@ -31,8 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="My Account"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/cartButton"
@@ -40,8 +39,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="My Cart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/sortButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onSortButtonClick"
+                android:text="Sort Title"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -58,6 +65,7 @@
                 android:ems="10"
                 android:hint="Search name/publish year"
                 android:inputType="textPersonName"
+                android:onClick="onSearchTextClick"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="37dp" />
 
@@ -65,6 +73,7 @@
                 android:id="@+id/searchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="onSearchButtonClick"
                 android:text="Search"
                 tools:layout_editor_absoluteX="242dp"
                 tools:layout_editor_absoluteY="37dp" />
