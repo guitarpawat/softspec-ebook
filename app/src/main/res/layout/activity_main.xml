@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Type book name..."
+                android:hint="Search name/publish year"
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="37dp" />
@@ -68,6 +68,7 @@
                 android:text="Search"
                 tools:layout_editor_absoluteX="242dp"
                 tools:layout_editor_absoluteY="37dp" />
+
         </LinearLayout>
 
         <ListView
