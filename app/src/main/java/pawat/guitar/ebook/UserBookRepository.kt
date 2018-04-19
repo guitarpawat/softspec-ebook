@@ -1,8 +1,10 @@
 package pawat.guitar.ebook
 
-import android.view.View
+import java.time.LocalDateTime
 
 class UserBookRepository: BookRepository() {
+    //private val boughtInfo = HashMap<Int,LocalDateTime>()
+
     override fun loadAllBooks() {
         resetTempList()
         setChanged()

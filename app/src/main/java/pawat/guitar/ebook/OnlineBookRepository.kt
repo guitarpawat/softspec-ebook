@@ -1,15 +1,25 @@
 package pawat.guitar.ebook
 
-import android.annotation.SuppressLint
 import android.os.AsyncTask
 import org.json.JSONArray
 import java.net.URL
 
+
+
 object OnlineBookRepository: BookRepository() {
 
+    var loaded = false
+
     override fun loadAllBooks() {
-        bookList.clear()
-        BookLoader().execute()
+        resetTempList()
+        if(!loaded) {
+            bookList.clear()
+            BookLoader().execute()
+            loaded = true
+        } else {
+            setChanged()
+            notifyObservers()
+        }
     }
 
     private class BookLoader: AsyncTask<Void,Void,String>() {

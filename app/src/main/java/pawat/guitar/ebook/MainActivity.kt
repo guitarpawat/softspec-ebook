@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity(), BookView {
     override fun onResume() {
         super.onResume()
         if(state != null) bookList.onRestoreInstanceState(state)
+        state = null
     }
 
     fun onSortButtonClick(view: View) {
