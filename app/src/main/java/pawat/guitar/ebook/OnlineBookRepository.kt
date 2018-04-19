@@ -5,14 +5,14 @@ import android.os.AsyncTask
 import org.json.JSONArray
 import java.net.URL
 
-class OnlineBookRepository: BookRepository() {
+object OnlineBookRepository: BookRepository() {
 
     override fun loadAllBooks() {
         bookList.clear()
         BookLoader().execute()
     }
 
-    private inner class BookLoader: AsyncTask<Void,Void,String>() {
+    private class BookLoader: AsyncTask<Void,Void,String>() {
         override fun doInBackground(vararg params: Void?): String {
             val url = URL(AppInfo.BOOKS_URL.info)
             return url.readText()

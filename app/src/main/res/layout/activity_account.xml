@@ -25,11 +25,12 @@
             android:weightSum="3">
 
             <Button
-                android:id="@+id/backButton"
+                android:id="@+id/addFundButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Back"
+                android:onClick="onAddFundButtonClick"
+                android:text="Add Fund"
                 android:textSize="12sp" />
 
             <TextView
@@ -74,7 +75,7 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/bookList"
+            android:id="@+id/ownList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

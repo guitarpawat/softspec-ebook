@@ -1,6 +1,6 @@
 package pawat.guitar.ebook
 
-class MockBookRepository : BookRepository() {
+object MockBookRepository : BookRepository() {
 
     override fun loadAllBooks() {
         bookList.clear()

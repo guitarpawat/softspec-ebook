@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:weightSum="8">
+        android:weightSum="7">
 
         <ImageView
             android:id="@+id/imageView"
@@ -37,16 +37,9 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
+                android:layout_height="16dp" />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/moreInfoButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=">" />
 
     </LinearLayout>
 

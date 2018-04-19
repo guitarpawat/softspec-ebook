@@ -48,4 +48,31 @@ abstract class BookRepository : Observable() {
         returnList = null
     }
 
+    open fun getBook(id: Int): Book? {
+        val mock = Book(id,"")
+        for(i in 0 until bookList.size) {
+            if(mock == bookList[i]) {
+                return bookList[i]
+            }
+        }
+        return null
+    }
+
+    protected fun addBook(book: Book) {
+        bookList.add(book)
+        setChanged()
+        notifyObservers()
+    }
+
+    fun moveTo(id: Int, dest: BookRepository) {
+        var move = getBook(id)
+        if(move == null) return
+        dest.addBook(move)
+        dest.resetTempList()
+        bookList.remove(move)
+        resetTempList()
+        setChanged()
+        notifyObservers()
+    }
+
 }

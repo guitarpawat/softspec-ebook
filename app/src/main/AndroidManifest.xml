@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AccountActivity" />
+        <activity android:name=".AccountActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".CartActivity" />
         <activity android:name=".BookInfoActivity"></activity>
     </application>
