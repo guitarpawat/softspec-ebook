@@ -63,19 +63,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Search name/publish year"
+                android:hint="Search book name/publish year"
                 android:inputType="textPersonName"
-                android:onClick="onSearchTextClick"
+                android:selectAllOnFocus="false"
                 tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="37dp" />
-
-            <Button
-                android:id="@+id/searchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onSearchButtonClick"
-                android:text="Search"
-                tools:layout_editor_absoluteX="242dp"
                 tools:layout_editor_absoluteY="37dp" />
 
         </LinearLayout>

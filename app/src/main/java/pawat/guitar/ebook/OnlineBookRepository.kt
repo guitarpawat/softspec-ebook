@@ -1,22 +1,18 @@
 package pawat.guitar.ebook
 
+import android.annotation.SuppressLint
 import android.os.AsyncTask
 import org.json.JSONArray
 import java.net.URL
-import java.util.ArrayList
 
 class OnlineBookRepository: BookRepository() {
-    val bookList = ArrayList<Book>()
+
     override fun loadAllBooks() {
         bookList.clear()
-        bookLoader().execute()
+        BookLoader().execute()
     }
 
-    override fun getBooks(): ArrayList<Book> {
-        return bookList
-    }
-
-    inner class bookLoader: AsyncTask<Void,Void,String>() {
+    private inner class BookLoader: AsyncTask<Void,Void,String>() {
         override fun doInBackground(vararg params: Void?): String {
             val url = URL(AppInfo.BOOKS_URL.info)
             return url.readText()

@@ -1,30 +1,51 @@
 package pawat.guitar.ebook
 
-import java.util.*
+import java.util.Observable
 import kotlin.collections.ArrayList
 
 abstract class BookRepository : Observable() {
+
+    protected val bookList = ArrayList<Book>()
+    protected var returnList : ArrayList<Book>? = null
+
     abstract fun loadAllBooks()
-    abstract fun getBooks(): ArrayList<Book>
 
+    open fun getBooks(): ArrayList<Book> {
+        if(returnList == null) {
+            returnList = ArrayList(bookList)
+        }
+        return returnList!!
+    }
 
-
-    fun search(keyword: List<String>):ArrayList<Book> {
+    open fun search(keyword: List<String>) {
+        if(keyword.isEmpty()) {
+            resetTempList()
+            return
+        }
         var search = ArrayList<Book>()
-        var books = getBooks()
-        for(i in 0 until books.size) {
+        for(i in 0 until bookList.size) {
             var valid = true
             for(j in 0 until keyword.size) {
-                if(!(books[i].title+" "+books[i].publicationYear.toString()).contains(keyword[j],true)) {
+                if(!(bookList[i].title+" "+bookList[i].publicationYear.toString()).contains(keyword[j],true)) {
                     valid = false
                     break
                 }
             }
-            if(valid == true) {
-                search.add(books[i])
+            if(valid) {
+                search.add(bookList[i])
             }
         }
-        return search
+        setTempList(search)
+    }
+
+    open fun setTempList(list: List<Book>) {
+        returnList = ArrayList(list)
+        setChanged()
+        notifyObservers()
+    }
+
+    open fun resetTempList() {
+        returnList = null
     }
 
 }

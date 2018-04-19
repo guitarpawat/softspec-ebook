@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import android.os.Parcelable
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 
 
@@ -19,6 +21,17 @@ class MainActivity : AppCompatActivity(), BookView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        searchEditText.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                presenter.search(searchEditText.text.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        })
 
         if(AppInfo.MOCK_UP.info == "true") {
             presenter = BookPresenter(this, MockBookRepository())
@@ -57,12 +70,5 @@ class MainActivity : AppCompatActivity(), BookView {
             sort = "title"
             sortButton.text = "Sort Title"
         }
-    }
-
-    fun onSearchButtonClick(view: View) {
-        presenter.search(searchEditText.text.toString())
-    }
-    fun onSearchTextClick(view: View) {
-        presenter.search(searchEditText.text.toString())
     }
 }

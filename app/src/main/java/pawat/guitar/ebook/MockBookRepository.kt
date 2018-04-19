@@ -1,7 +1,7 @@
 package pawat.guitar.ebook
 
 class MockBookRepository : BookRepository() {
-    val bookList = ArrayList<Book>()
+
     override fun loadAllBooks() {
         bookList.clear()
         bookList.add(Book(1,"How to win BNK election",500.0,44))
@@ -11,7 +11,4 @@ class MockBookRepository : BookRepository() {
         notifyObservers()
     }
 
-    override fun getBooks(): ArrayList<Book> {
-        return bookList
-    }
 }

@@ -16,15 +16,17 @@ class BookPresenter(val view: BookView,
     }
 
     fun sort(sort: String) {
+        var temp : List<Book>
         if(sort == "title") {
-            repository.getBooks().sortWith(Comparator { o1, o2 -> (o1.title.compareTo(o2.title)) })
+            temp = repository.getBooks().sortedWith(Comparator { o1, o2 -> (o1.title.compareTo(o2.title)) })
         } else if(sort == "year") {
-            repository.getBooks().sortWith(Comparator { o1, o2 -> (o1.publicationYear-o2.publicationYear) })
+            temp = repository.getBooks().sortedWith(Comparator { o1, o2 -> (o1.publicationYear-o2.publicationYear) })
         }
-        view.setBookList(repository.getBooks())
+        else return
+        repository.setTempList(temp)
     }
 
     fun search(keyword: String) {
-        view.setBookList(repository.search(keyword.split(" ")))
+        repository.search(keyword.split(" "))
     }
 }
