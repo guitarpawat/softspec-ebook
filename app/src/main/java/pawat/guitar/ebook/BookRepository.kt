@@ -1,5 +1,6 @@
 package pawat.guitar.ebook
 
+import android.support.annotation.CallSuper
 import java.util.Observable
 import kotlin.collections.ArrayList
 
@@ -38,13 +39,13 @@ abstract class BookRepository : Observable() {
         setTempList(search)
     }
 
-    open fun setTempList(list: List<Book>) {
+    fun setTempList(list: List<Book>) {
         returnList = ArrayList(list)
         setChanged()
         notifyObservers()
     }
 
-    open fun resetTempList() {
+    fun resetTempList() {
         returnList = null
     }
 
@@ -58,13 +59,15 @@ abstract class BookRepository : Observable() {
         return null
     }
 
-    protected fun addBook(book: Book) {
+    @CallSuper
+    protected open fun addBook(book: Book) {
         bookList.add(book)
         setChanged()
         notifyObservers()
     }
 
-    fun moveTo(id: Int, dest: BookRepository) {
+    @CallSuper
+    open fun moveTo(id: Int, dest: BookRepository) {
         var move = getBook(id)
         if(move == null) return
         dest.addBook(move)

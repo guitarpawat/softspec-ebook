@@ -1,9 +1,9 @@
 package pawat.guitar.ebook
 
-import java.time.LocalDateTime
+import java.util.*
 
 class UserBookRepository: BookRepository() {
-    //private val boughtInfo = HashMap<Int,LocalDateTime>()
+    private val boughtInfo = HashMap<Int, Long>()
 
     override fun loadAllBooks() {
         resetTempList()
@@ -12,7 +12,24 @@ class UserBookRepository: BookRepository() {
     }
 
     fun addAllBooks(books: ArrayList<Book>) {
-        bookList.addAll(books)
+        books.forEach { addBook(it) }
         loadAllBooks()
+    }
+
+    override fun addBook(book: Book) {
+        boughtInfo[book.id] = Calendar.getInstance().timeInMillis
+        super.addBook(book)
+    }
+
+    override fun moveTo(id: Int, dest: BookRepository) {
+        boughtInfo.remove(id)
+        super.moveTo(id, dest)
+    }
+
+    fun getBoughtTimeMills(id: Int): Long {
+        if(boughtInfo.containsKey(id)){
+            return boughtInfo[id]!!
+        }
+        return 0L
     }
 }

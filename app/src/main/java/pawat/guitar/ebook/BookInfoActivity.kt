@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_book_info.*
+import java.util.*
 
 
 class BookInfoActivity : AppCompatActivity() {
@@ -31,6 +32,15 @@ class BookInfoActivity : AppCompatActivity() {
         yearTextView.text = book.getInt("year").toString()
         actionButton.text = intent.getStringExtra("action")
 
+        if(actionButton.text == "Read") {
+            if((Calendar.getInstance().timeInMillis - User.own.getBoughtTimeMills(id)) <= 300000) {
+                actionButton.text = "Refund"
+            } else {
+                actionButton.isEnabled = false
+                actionButton.text = "Read (Buy it with real money)"
+            }
+        }
+
         if(DownloadImageActivity.imgCache.containsKey(id)) {
             bookView.setImageBitmap(DownloadImageActivity.imgCache[id])
         } else {
@@ -42,10 +52,15 @@ class BookInfoActivity : AppCompatActivity() {
         if(actionButton.text == "Add to Cart") {
             repository.moveTo(id,User.cart)
             actionButton.text = "Remove from Cart"
-        }
-        else if(actionButton.text == "Remove from Cart") {
+        } else if(actionButton.text == "Remove from Cart") {
             User.cart.moveTo(id,repository)
             actionButton.text = "Add to Cart"
+        } else if(actionButton.text == "Refund") {
+            val book = User.own.getBook(id)
+            User.own.moveTo(id,OnlineBookRepository)
+            User.deposite(book!!.price)
+            actionButton.isEnabled = false
+            actionButton.text = "Refunded"
         }
     }
 
